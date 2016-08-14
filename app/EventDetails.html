@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/css/app.css"/>
 </head>
-<body>
+<body ng-cloak>
 <div class="container">
     <div class="navbar">
         <div class="navbar-inner">
@@ -14,15 +14,20 @@
             </ul>
         </div>
     </div>
+    <button class="btn" ng-disabled="buttonDisabled">Disabled</button>
+    <div ng-non-bindable>{{2+1}}</div>
     <div ng-controller="EventController"
          style="padding-left: 20px; padding-right: 20px">
         <img ng-src="{{event.imageUrl}}" alt="{{event.name}}">
 
         <div class="row">
             <div class="span11">
-                <h2 ng-bind="event.name"></h2>
+                <h2 ng-class="myclass" ng-bind-template="{{event.name}}{{event.date}}"></h2>
             </div>
         </div>
+        <div ng-bind-html="sniffer">some title</div>
+        <div ng-show="event.boolValue">Show This</div>
+        <div ng-hide="event.boolValue">Hide This</div>
         <div class="row">
             <div class="span3">
                 <div><strong>{{event.date}}</strong></div>
@@ -32,22 +37,38 @@
             <div class="span4">
                 <address><strong>Address:</strong>
                     <br>
-                    {{event.location.address}}<br>
+                    {{event.location.address|lowercase}}<br>
                     {{event.location.city}}<br>
                     {{event.location.province}}<br>
 
                 </address>
             </div>
         </div>
+        <div>{{3.1415926535|number}}</div>
         <hr/>
+        Order By:
+        <select ng-model="sortorder" class="input-small">
+            <option value="upVoteCount" selected>Vote</option>
+            <option value="name">Name</option>
+            <option value="creatorName">creator By</option>
+        </select>
+        Show:
+        <select ng-model="query.level" class="input-medium">
+            <option value="" selected>All</option>
+            <option value="introductory">Introductory</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advance">Advance</option>
+        </select>
+
         <h3>sessions</h3>
         <hl class="thumbnails">
-            <li ng-repeat="session in event.sessions">
+            <li ng-repeat="session in event.sessions|orderBy:sortorder |limitTo:2 |filter:query">
 
 
                 <div class="row session">
                     <div class="span0 well votingWidget">
-                        <div class="votingButton"><i class="icon-chevron-up icon-white" ng-click="upVoteSession(session)"></i>
+                        <div class="votingButton"><i class="icon-chevron-up icon-white"
+                                                     ng-click="upVoteSession(session)"></i>
                         </div>
                         <div class="badge badge-inverse">
                             <div>{{session.upVoteCount}}</div>
@@ -70,7 +91,6 @@
 
                         <p>{{session.abstract}}</p>
                     </div>
-
                 </div>
             </li>
         </hl>
@@ -81,6 +101,7 @@
 <script src="/lib/bootstrap.min.js"></script>
 <script src="/lib/underscore-1.4.4.min.js"></script>
 <script src="/lib/angular/angular.js"></script>
+<script src="/lib/angular/angular-sanitize.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/controllers/EventController.js"></script>
 

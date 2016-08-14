@@ -76,3 +76,7 @@ select, textarea {
     left: 209px;
     background-color: #272b30;
 }
+
+[ng\:clock],[ng-clock]{
+    display: none;
+}
