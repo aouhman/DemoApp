@@ -77,6 +77,6 @@ select, textarea {
     background-color: #272b30;
 }
 
-[ng\:clock],[ng-clock]{
-    display: none;
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
 }
