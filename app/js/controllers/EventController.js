@@ -6,7 +6,7 @@ eventsApp.controller('EventController',
         $scope.sniffer = "<span style='color: red'>h1 there</span>";
         $scope.boolValue = false;
         $scope.myclass = "background-color:blue";
-        $scope.buttonDisabled = false;
+        $scope.buttonDisabled = true;
         $scope.sortorder = '-upVoteCount';
 
             $scope.event = {
