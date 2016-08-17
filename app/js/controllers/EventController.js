@@ -9,6 +9,14 @@ eventsApp.controller('EventController',
         $scope.buttonDisabled = true;
         $scope.sortorder = '-upVoteCount';
         $scope.event = eventData.event;
+        $scope.event = eventData.getEvent()
+            .success(function (event) {$scope.event = event;})
+            .error(function (data, status, headers, config) {
+                console.warn(data, status, headers(), config);
+            });
+
+
+
 
         $scope.upVoteSession = function (session) {
             session.upVoteCount++;
