@@ -2,15 +2,24 @@
 
 eventsApp.controller('EditEventController',
 
-    function EditEventController($scope) {
+    function EditEventController($scope, eventData) {
+        $scope.event = {} ;
         $scope.saveEvent = function (event, newEventForm) {
-            if(newEventForm.$valid)
-            alert("event " + event.name + " saved!" );
-            else
-                alert("Formulaire n'est pas valide")
+            if (newEventForm.$valid) {
+                eventData.save(event).
+                    $promise.then(
+
+                            function (response) {
+                                console.log(event);
+                                console.log('success', response)
+                            })
+
+
+
+            }
         };
         $scope.cancelEdit = function () {
-            window.location = "/EventDetails.html" ;
+            window.location = "/EventDetails.html";
         }
     }
 );
