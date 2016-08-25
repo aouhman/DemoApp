@@ -13,9 +13,6 @@ eventsApp.controller('EditEventController',
                                 console.log(event);
                                 console.log('success', response)
                             })
-
-
-
             }
         };
         $scope.cancelEdit = function () {
