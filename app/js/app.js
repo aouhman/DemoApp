@@ -15,7 +15,7 @@ var eventsApp = angular.module('eventsApp', ['ngSanitize','ngResource' ,'ngRoute
         $routeProvider.when('/event/:eventId',
             {
                 foo:'bar',
-                templateUrl: 'templates/EventDetails.html',
+                template: 'Hello World',
                 controller: 'EventController'
             });
         $routeProvider.otherwise({redirectTo:'/events'});
