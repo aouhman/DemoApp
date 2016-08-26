@@ -1,11 +1,13 @@
 'use strict';
 
 eventsApp.controller('EventController',
-    function ($scope, eventData, $anchorScroll,$routeParams) {
+    function EventController($scope, eventData, $anchorScroll,$routeParams,$route) {
 
         $scope.sortorder = 'name';
         $scope.event = eventData.getEvent($routeParams.eventId);
-
+        $scope.reload = function () {
+            $route.reload();
+        };
         $scope.upVoteSession = function (session) {
             session.upVoteCount++;
         };
